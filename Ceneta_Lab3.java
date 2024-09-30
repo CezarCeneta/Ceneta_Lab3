@@ -5,7 +5,6 @@ class StudentInfo {
     private String StudentName;
     private String Course;
     private String courseCode;
-    private int[] NumOfUnits;
     private int TotalUnits;
     private static final int feePerUnit = 1000;
 
@@ -14,7 +13,6 @@ class StudentInfo {
         this.StudentName = StudentName;
         this.Course = Course;
         this.courseCode = courseCode;
-        this.NumOfUnits = new int[10]; //The maximum number of units is 10
         this.TotalUnits = 0;
     }
 
@@ -38,47 +36,73 @@ class StudentInfo {
         return this.TotalUnits;
     }
 
+    //Method for requesting prompt from the user by units
     public void InputUnits() {
         Scanner inputUnits = new Scanner(System.in);
         System.out.print("Enter the amount of units: ");
-        int unitInput = inputUnits.nextInt();
-        this.TotalUnits = unitInput ; 
+        int unitInput = inputUnits.nextInt(); //Ask the user for the units
+        this.TotalUnits = unitInput ; //The entered unit is now stored to the total units 
 
     }
     
+    //Method for entering the Student name
     public String inputStudentName() {
         Scanner student = new Scanner(System.in);
-        System.out.print("\nEnter Student Name: ");
-        String nameStudent = student.nextLine();
-        return this.StudentName = nameStudent;
+        System.out.print("Enter Student Name: ");
+        String nameStudent = student.nextLine(); //Ask the user for the Student name
+        return this.StudentName = nameStudent; //The entered student name is stored to the private parameter
 
     }
 
+    //Method for entering the Course
+    public String inputCourse() {
+        Scanner course = new Scanner(System.in);
+        System.out.print("Enter Course: ");
+        String courseSub = course.nextLine(); //Ask the user for Course
+        return this.Course = courseSub; //The entered course is stored to the private parameter
+
+    }
+
+    //Method for entering the Course code
+    public String inputCourseCode() {
+        Scanner coursecode = new Scanner(System.in);
+        System.out.print("Enter Course Code: ");
+        String courseCodes = coursecode.nextLine(); //Ask the user for Course code
+        return this.courseCode = courseCodes; //The entered course code is stored to the private parameter
+
+    }
+
+    //Method for calculating the total fee per amount of unit
     public int calculateTotalFee() {
         return this.TotalUnits * feePerUnit;
     }
 
+    //Method for displaying the Student name and totalfee
     public void displayStudentInfo() {
         System.out.println("Student Name: " + StudentName);
         System.out.println("Total Enrollment Fee: " + calculateTotalFee());
     }
+
+    //Method for proccessing the payment for the enrollment fee
     public void processPayment() {
     Scanner inputPayment = new Scanner(System.in);
     int totalFee = calculateTotalFee();
     System.out.println("\nEnter payment amount: ");
-    int paymentAmount = inputPayment.nextInt();
+    int paymentAmount = inputPayment.nextInt(); //Ask the user for the payment
 
+    //Using conditionals varying the amount of payment entered by the user
     if (paymentAmount == totalFee) {
-        System.out.println("Fully Paid");
+        System.out.println("Fully Paid"); //The payment is exact
     } else if (paymentAmount < totalFee) {
-        System.out.println("Partial Payment. Amount Paid: " + paymentAmount);
+        System.out.println("Partial Payment. Amount Paid: " + paymentAmount); //The payment is lesser than the full payment
     } else {
-        System.out.println("Overpayment. Change: " + (paymentAmount - totalFee));
+        System.out.println("Overpayment. Change: " + (paymentAmount - totalFee)); //The payment is greater and hands in change of the payment
     }
 
     }
 }
 
+//
 public class Ceneta_Lab3 {
     public static void main(String[] args) {
     Scanner in = new Scanner(System.in);
@@ -89,11 +113,11 @@ public class Ceneta_Lab3 {
     //Input the Student Name
     student.inputStudentName();
 
-    System.out.print("Enter the Course: ");
-    String Course = in.nextLine();
+    //Input the Course 
+    student.inputCourse();
 
-    System.out.print("Enter the Course code: ");
-    String courseCode = in.nextLine();
+    //Input the Course code
+    student.inputCourseCode();
 
     //Input units per subject
     student.InputUnits();
